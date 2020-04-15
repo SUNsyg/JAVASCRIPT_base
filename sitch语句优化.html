@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>优化</title>
+</head>
+<body>
+<script>
+  let color = "red"
+  function printBlackBackground(){
+    console.log('black')
+  }
+  function printRedBackground(){
+    console.log('red')
+  }
+
+  function printBlueBackground(){
+    console.log('blue')
+  }
+
+  function printGreenBackground(){
+    console.log('green')
+  }
+
+  function printYellowBackground(){
+    console.log('yellow')
+  }
+  switch(color) {
+    case 'black':
+      printBlackBackground();
+      break;
+    case 'red':
+      printRedBackground();
+      break;
+    case 'blue':
+      printBlueBackground();
+      break;
+    case 'green':
+      printGreenBackground();
+      break;
+    default:
+      printYellowBackground();
+  }
+
+
+  let  colorObj = {
+    black: printBlackBackground,
+    red: printRedBackground,
+    blue: printBlueBackground,
+    green: printGreenBackground,
+    yellow: printYellowBackground
+  }
+
+  colorObj[color]? colorObj[color]() : printYellowBackground()
+
+  let colorMap = new Map([
+      ['black', printBlackBackground],
+      ['red', printRedBackground],
+      ['blue', printBlueBackground],
+      ['green', printGreenBackground],
+      ['yellow', printYellowBackground],
+  ])
+  colorMap.get(color)?'星期'+colorMap.get(color)() : printYellowBackground()
+
+  // 尽量使用箭头函数
+  // 尽量使用模板字符串
+  // 尽量使用解构赋值
+  // 尽量使用ES6语法，会发现代码会少很多
+</script>
+</body>
+</html>
