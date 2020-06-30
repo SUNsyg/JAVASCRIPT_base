@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪数组</title>
+</head>
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+<div id="div"></div>
+<script>
+    var liArr = document.getElementsByTagName('li');
+    var oDiv = document.getElementById('div')
+    for(var i=0;i<liArr.length;i++) {
+        console.log(liArr[i])
+        console.log(i)
+    }
+    // Array.prototype.slice.call(liArr).forEach(function(item,index) {
+    //     console.log(item)
+    //     console.log(index)
+    // })
+
+    for(var liItem of liArr) {
+        console.log(liArr)
+        console.log(liItem)
+    }
+</script>
+</body>
+</html>
