@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>字节面试题</title>
+</head>
+<body>
+<script>
+    // 输入["flower","flow","flight"]，输出"fl"
+    // 输入["dog","racecar","car"]，输出""，解释：无公共前缀
+
+    function getPrefix(strs) {
+        if (strs === null || strs.length === 0) return ""; // 容错
+        var initStr = strs[0];
+        for(var j = 0; j<strs.length;j++) {
+            for (var i=0;i<initStr.length && i<strs[j].length;i++) {
+                if(initStr.charAt(i) !== strs[i].charAt(j)) break;
+            }
+            initStr = initStr.substring(0, j);
+            if(initStr === '') return ''
+        }
+        return initStr
+    }
+    // console.log(getPrefix(["flower","flow","flight"]))
+
+
+    var longestCommonPrefix = function(strs) {
+        if (strs == null || strs.length === 0) return "";
+        if (strs.length === 1) return strs[0]
+        let min = 0, max = 0;
+        for (let i=0;i<strs.length;i++) {
+            // 字母比较a最小，z最大
+            if (strs[min] > strs[i]) min = i
+            if (strs[max] < strs[i]) max = i
+        }
+        for (let j = 0;j<strs[min].length; j++) {
+            if (strs[min].charAt(j) !== strs[max].charAt(j)) {
+                return strs[min].substring(0, j)
+            }
+        }
+        return strs[min]
+    }
+    longestCommonPrefix(["flower","flow","flight"])
+
+    var longestCommonPrefix1 = function(strs) {
+        if (strs == null || strs.length === 0) return "";
+        return lCPrefixRec(strs)
+    }
+    function lCPrefixRec(strs) {
+        let length = strs.length;
+        if (strs.length === 1) return strs[0]
+        let mid = Math.floor(length / 2),
+            left = strs.slice(0, mid),
+            right = strs.slice(mid, length);
+        return lCPrefixTwo(lCPrefixRec(left), lCPrefixRec(right))
+    }
+    function lCPrefixTwo(str1, str2) {
+        let j=0;
+        for(;j<str1.length && j < str2.length;j++) {
+            if (str1.charAt(j) !== str2.charAt(j)) {
+                break;
+            }
+        }
+        return str1.substring(0, j)
+    }
+
+    longestCommonPrefix1(["flower","flow","flight"])
+</script>
+</body>
+</html>
