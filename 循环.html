@@ -5,24 +5,36 @@
     <title>循环</title>
 </head>
 <body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
 <script>
 let arr = [1,2,3,4,5];
-// for (let i=0; i<arr.length; i++) {
-//     if (i == 2) {
-//         console.log(arr[i])
-//         // break;
-//         // continue;
-//     }
-//     console.log(i)
-// }
+for (let i=0; i<arr.length; i++) {
+    if (i == 2) {
+        console.log(arr[i])
+        // break;
+        // continue;
+    }
+    console.log(i)
+}
+var lis = document.getElementsByTagName('li');
+for(var i of lis) {
+    console.log(i)
+}
 
-// arr.forEach(function(item, index) {
-//     console.log(item)
-// })
-//     var map = arr.map((item, index, array) => {
-//         return item * 10
-//     })
-//     console.log(map)
+arr.forEach(function(item, index) {
+    console.log(item)
+})
+    var map = arr.map((item, index, array) => {
+        return item * 10
+    })
+    console.log(map)
 
     var obj = {
     a: 1,
@@ -32,6 +44,44 @@ for (var i in obj) {
     console.log(i)
     console.log(obj[i])
 }
+
+var s = new Set([1,1,1,2,3,4]);
+for(let i of s) {
+    console.log(i)
+}
+s.forEach(function(item, index) {
+    console.log(item)
+})
+
+    let m = new Map([
+        ['name', '小明'],
+        ['age', '34'],
+    ]);
+console.log(m);
+for(let i of m.keys()) {
+    console.log(i)
+}
+for(let i of m.values()) {
+    console.log(i)
+}
+for(let i of m.entries()) {
+    console.log(i[0]) // key
+    console.log(i[1]) // value
+}
+for(let i of m) {
+    console.log(i[0]) // key
+    console.log(i[1]) // value
+}
+console.log('-----------------')
+m.forEach(function(value, key, map) {
+    console.log(value)
+    console.log(key)
+    console.log(map)
+})
+m.forEach(function(item, index) {
+    console.log(item)
+    console.log(index)
+})
 </script>
 </body>
 </html>
