@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="oDiv"></div>
+<script>
+    var oDiv = document.getElementById('oDiv')
+    oDiv.onclick = function() {
+        window.addEventListener('beforeunload', (e) => {
+            e.preventDefault();
+            return '您要离开页面吗'
+        });
+        location.href = 'after.html'
+    }
+
+</script>
+</body>
+</html>
