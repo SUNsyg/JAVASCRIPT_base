@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*纸飞机*/
+        .btn1 {
+            background: #5f55af;
+            border: 0;
+            border-radius: 5px;
+            padding: 10px 30px 10px 20px;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+            outline: none;
+        }
+
+        .btn1 svg {
+            display: inline-block;
+            vertical-align: middle;
+            padding-right: 5px;
+        }
+
+        .btn1:hover svg {
+            animation: fly 1s linear;
+
+        }
+        @keyframes fly {
+            0% {
+                transform: translateX(0%);
+            }
+            50% {
+                transform: translateX(300%);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
+
+
+        /*阴影*/
+        #neon-btn {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            height: 200px;
+            background: #031628;
+        }
+
+        #neon-btn .btn {
+            border: 1px solid;
+            background-color: transparent;
+            text-transform: uppercase;
+            font-size: 14px;
+            padding: 10px 20px;
+            font-weight: 300;
+            outline: none;
+        }
+        #neon-btn .btn.one {
+            color: #4cc9f0;
+        }
+
+        #neon-btn .btn.two {
+            color: #f038ff;
+        }
+
+        #neon-btn .btn.three {
+            color: #b9e769;
+        }
+
+        #neon-btn .btn:hover {
+            color: #ffffff;
+            border: 0;
+        }
+
+        #neon-btn .btn.one:hover {
+            background: #4cc9f0;
+            -webkit-box-shadow: 10px 10px 99px 6px rgba(76,201,240,1);
+            -moz-box-shadow: 10px 10px 99px 6px rgba(76,201,240,1);
+            box-shadow: 10px 10px 99px 6px #4cc9f0;
+        }
+        #neon-btn .btn.two:hover {
+            background: #f038ff;
+            -webkit-box-shadow: 10px 10px 99px 6px rgba(240, 56, 255, 1);
+            -moz-box-shadow: 10px 10px 99px 6px rgba(240, 56, 255, 1);
+            box-shadow: 10px 10px 99px 6px #4cc9f0;
+        }
+        #neon-btn .btn.three:hover {
+            background: #b9e769;
+            -webkit-box-shadow: 10px 10px 99px 6px rgba(185, 231, 105, 1);
+            -moz-box-shadow: 10px 10px 99px 6px rgba(185, 231, 105, 1);
+            box-shadow: 10px 10px 99px 6px #4cc9f0;
+        }
+
+        /*边框*/
+        #draw-border {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100px;
+        }
+        #draw-border button {
+            border: 0;
+            background: none;
+            outline: none;
+            text-transform: uppercase;
+            color: #4361ee;
+            font-weight: bold;
+            position: relative;
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+        #draw-border button::before, #draw-border button::after {
+            box-sizing: inherit;
+            position: absolute;
+            content: '';
+            border: 2px solid transparent;
+            width: 0;
+            height: 0;
+        }
+        #draw-border button::after {
+            bottom: 0;
+            right: 0;
+        }
+        #draw-border button::before {
+            top: 0;
+            left: 0;
+        }
+        #draw-border button:hover::before, #draw-border button:hover::after {
+            width: 100%;
+            height: 100%;
+        }
+        #draw-border button:hover::before {
+            border-top-color: #4361ee;
+            border-right-color: #4361ee;
+            transition: width 0.3s ease-out, height 0.3s ease-out 0.3s;
+        }
+        #draw-border button:hover::after {
+            border-bottom-color: #4361ee;
+            border-left-color: #4361ee;
+            transition: border-color 0s ease-out 0.6s, width 0.3s ease-out 0.6s, height 0.3s ease-out 1s;
+        }
+
+        /*圆形*/
+        #circle-btn {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #circle-btn .btn-container {
+            position: relative;
+        }
+        #circle-btn .btn-container button {
+            border: 0;
+            border-radius: 50px;
+            color: #ffffff;
+            background: #5f55af;
+            padding: 15px 20px 16px 60px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #f72585 50%, #5f55af 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+            transition:all 2s ease;
+        }
+        #circle-btn .btn-container svg {
+            background: #f72585;
+            padding: 16px;
+            border-radius: 50%;
+            position: absolute;
+            left:0;
+            top:0;
+        }
+        #circle-btn .btn-container:hover button {
+            background-position: left bottom;
+        }
+
+        /*圆角*/
+        #border-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 200px;
+        }
+        #border-btn button {
+            border: none;
+            background: #2ec4b6;
+            text-transform: uppercase;
+            color: #ffffff;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 15px 30px;
+            transition: border-radius 1s ease-out;
+            -webkit-transition: border-radius 1s ease-out;
+            outline: none;
+            position: relative;
+        }
+        #border-btn button:hover {
+            border-bottom-right-radius: 50px;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="send-btn">
+    <button class="btn1">
+        <svg t="1597631855174" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2316" width="16" height="16"><path d="M899.6 117c9.9 7.1 13.8 16.7 12 28.5L797.3 831.2c-1.5 8.6-6.3 15.3-14.3 20.1-4.1 2.3-8.8 3.6-13.8 3.6-3.3 0-6.9-0.8-10.7-2.3L556.3 770 448.2 901.8c-5.4 6.9-12.7 10.2-21.9 10.2-3.8 0-7.1-0.6-9.9-1.8-5.6-2.1-10.2-5.5-13.6-10.5-3.4-4.9-5.2-10.3-5.2-16.3V727.7l385.7-472.8-477.2 413-176.3-72.3c-11-4.1-17-12.3-17.8-24.6-0.6-11.9 4.1-20.7 14.3-26.4L869.1 116c4.5-2.7 9.2-4 14.3-4 6 0 11.4 1.7 16.2 5z" p-id="2317">
+        </path></svg>
+        Send
+    </button>
+</div>
+<div id="neon-btn">
+    <button class="btn one">Hover me</button>
+    <button  class="btn two">Hover me</button>
+    <button  class="btn three">Hover me</button>
+</div>
+
+<div id="draw-border">
+    <button>Hover me</button>
+</div>
+
+<div id="circle-btn">
+    <div class="btn-container">
+        <svg t="1597631855174" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2316" width="16" height="16"><path d="M899.6 117c9.9 7.1 13.8 16.7 12 28.5L797.3 831.2c-1.5 8.6-6.3 15.3-14.3 20.1-4.1 2.3-8.8 3.6-13.8 3.6-3.3 0-6.9-0.8-10.7-2.3L556.3 770 448.2 901.8c-5.4 6.9-12.7 10.2-21.9 10.2-3.8 0-7.1-0.6-9.9-1.8-5.6-2.1-10.2-5.5-13.6-10.5-3.4-4.9-5.2-10.3-5.2-16.3V727.7l385.7-472.8-477.2 413-176.3-72.3c-11-4.1-17-12.3-17.8-24.6-0.6-11.9 4.1-20.7 14.3-26.4L869.1 116c4.5-2.7 9.2-4 14.3-4 6 0 11.4 1.7 16.2 5z" p-id="2317">
+        </path></svg>
+        <button>Hover me</button>
+    </div>
+</div>
+
+<div id="border-btn">
+    <button>Hover me</button>
+</div>
+</body>
+</html>
