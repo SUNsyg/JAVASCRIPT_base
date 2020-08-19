@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+<script>
+    // const promise1 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve('success')
+    //     }, 1000)
+    // })
+    // const promise2 = promise1.then(() => {
+    //     throw new Error('error!!!')
+    // })
+    // console.log('promise1', promise1)
+    // console.log('promise2', promise2)
+    // setTimeout(() => {
+    //     console.log('promise1', promise1)
+    //     console.log('promise2', promise2)
+    // }, 2000)
+
+    // const promise = new Promise((resolve, reject) => {
+    //     reject("error");
+    //     resolve("success2");
+    // });
+    // promise
+    //     .then(res => {
+    //         console.log("then1: ", res);
+    //     }).then(res => {
+    //     console.log("then2: ", res);
+    // }).catch(err => {
+    //     console.log("catch: ", err);
+    // }).then(res => {
+    //     console.log("then3: ", res);
+    // })
+
+    // Promise.resolve(1)
+    //     .then(res => {
+    //         console.log(res);
+    //         return 2;
+    //     })
+    //     .catch(err => {
+    //         return 3;
+    //     })
+    //     .then(res => {
+    //         console.log(res);
+    //     });
+
+    // const promise = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         console.log('timer')
+    //         resolve('success')
+    //     }, 1000)
+    // })
+    // const start = Date.now();
+    // promise.then(res => {
+    //     console.log(res, Date.now() - start)
+    // })
+    // promise.then(res => {
+    //     console.log(res, Date.now() - start)
+    // })
+
+    // const promise = Promise.resolve().then(() => {
+    //     return promise;
+    // })
+    // promise.catch(console.err)
+
+    // Promise.resolve(1)
+    //     .then(2)
+    //     .then(Promise.resolve(3))
+    //     .then(console.log)
+
+
+    // Promise.reject('err!!!')
+    //     .then((res) => {
+    //         console.log('success', res)
+    //     }, (err) => {
+    //         console.log('error', err)
+    //     }).catch(err => {
+    //     console.log('catch', err)
+    // })
+
+    // Promise.resolve()
+    //     .then(function success (res) {
+    //         throw new Error('error!!!')
+    //     }, function fail1 (err) {
+    //         console.log('fail1', err)
+    //     }).catch(function fail2 (err) {
+    //     console.log('fail2', err)
+    // })
+
+    // function promise1 () {
+    //     let p = new Promise((resolve) => {
+    //         console.log('promise1');
+    //         resolve('1')
+    //     })
+    //     return p;
+    // }
+    // function promise2 () {
+    //     return new Promise((resolve, reject) => {
+    //         reject('error')
+    //     })
+    // }
+    // promise1()
+    //     .then(res => console.log(res))
+    //     .catch(err => console.log(err))
+    //     .finally(() => console.log('finally1'))
+    //
+    // promise2()
+    //     .then(res => console.log(res))
+    //     .catch(err => console.log(err))
+    //     .finally(() => console.log('finally2'))
+
+    // function runAsync (x) {
+    //     const p = new Promise(r => setTimeout(() => r(x, console.log(x)), 1000))
+    //     return p
+    // }
+    // Promise.all([runAsync(1), runAsync(2), runAsync(3)])
+    //     .then(res => console.log(res))
+
+    function runAsync (x) {
+        const p = new Promise(r => setTimeout(() => r(x, console.log(x)), 1000))
+        return p
+    }
+    function runReject (x) {
+        const p = new Promise((res, rej) => setTimeout(() => rej(`Error: ${x}`, console.log(x)), 1000 * x))
+        return p
+    }
+    Promise.all([runAsync(1), runReject(4), runAsync(3), runReject(2)])
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+
+
+
+</script>
+</body>
+</html>

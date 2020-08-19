@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise</title>
+</head>
+<body>
+<script>
+    function timeout(ms) {
+        return new Promise(function(resolve, reject) {
+            setTimeout(resolve, ms, 'done', '11');
+        })
+    }
+    timeout(0).then(function(res) {
+        console.log(res)
+    })
+
+    let promise = new Promise(function(resolve, reject) {
+        console.log('Promise');
+        resolve();
+    });
+
+    promise.then(function() {
+        console.log('Resolved.');
+    });
+
+    console.log('Hi!');
+
+
+    let getJson = function(url) {
+        let promise = new Promise(function(resolve, reject) {
+            let client = new XMLHttpRequest();
+            client.open('GET', url)
+            client.responseText = 'json'
+            client.onreadystatechange = function() {
+                if (this.readyState !== 4) {
+                    return;
+                }
+                if (this.status === 200) {
+                    resolve(this.response)
+                } else {
+                    reject(new Error(this.statusText));
+                }
+            }
+            client.setRequestHeader('Accept', 'application/json')
+            client.send()
+        })
+        return promise;
+    }
+
+    getJson('./post.json').then(function(json) {
+        console.log(JSON.parse(json))
+    }, function(error) {
+        console.log(error)
+    })
+
+
+    var p1 = new Promise(function(resolve, reject) {
+        setTimeout(() => reject(new Error('fail')), 3000)
+    })
+    var p2 = new Promise(function(resolve, reject) {
+        setTimeout(() => resolve(p1), 1000)
+    })
+    p2
+        .then(function(result) {
+        console.log(result)
+    })
+        .catch(function(error) {
+            console.log(error)
+    })
+
+
+    var someAsyncThing = function() {
+        return new Promise(function(resolve, reject) {
+            // 下面一行会报错，因为x没有声明
+            resolve(x + 2);
+        });
+    };
+    someAsyncThing()
+    .catch(function(error) {
+        console.log('oh no', error)
+        y + 2;
+    })
+    .catch(function(error) {
+        console.log('carry on', error);
+    })
+
+
+    var pa1 = new Promise(function(resolve, reject) {
+        resolve('111')
+    })
+    var pa2 = new Promise(function(resolve, reject) {
+        resolve('222')
+    })
+    var pa3 = new Promise(function(resolve, reject) {
+        reject('333')
+    })
+    var pa = Promise.all([pa1, pa2, pa3]);
+    pa.then(function(res) {
+        console.log(res)
+    })
+    .catch(function(error) {
+        console.log('pa', error)
+    })
+
+    let thenAble = {
+        then: function(resolve, reject) {
+            resolve(42)
+        }
+    }
+
+    var pt = Promise.resolve(thenAble)
+    pt.then(function(res) {
+        console.log(res)
+    })
+
+
+    const promise1 = new Promise((resolve, reject) => {
+        console.log('promise1')
+    })
+    console.log('1', promise1);
+</script>
+</body>
+</html>
