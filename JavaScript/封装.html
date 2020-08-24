@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>封装</title>
+</head>
+<body>
+<script>
+    // // 1. 构造函数
+    // function Cat (name) {    this.name}
+    // // 2. 构造函数原型对象
+    // Cat.prototype
+    // // 3. 使用Cat构造函数创建的实例'乖乖'
+    // var guaiguai = new Cat('guaiguai')
+    // // 4. 构造函数的静态方法,名为fn
+    // Cat.fn = function () {}
+    // // 5. 原型对象上的方法,名为fn
+    // Cat.prototype.fn = function () {}
+
+    // function Cat (name, color) {
+    //     var heart = '❤️';
+    //     var stomach = '胃' ;
+    //     var heartbeat = function () {    console.log(heart + '跳')  }
+    //     this.name = name
+    //     this.color = color
+    //     this.jump = function () {
+    //         heartbeat()
+    //         // 能跳起来表明这只猫是活的,心也就能跳
+    //         console.log('我跳起来了~来追我啊')
+    //     }
+    // }
+    // Cat.description = '1111'
+    // Cat.actingCute = function() {
+    //     console.log('我会卖萌')
+    // }
+    // Cat.prototype.cleanBody = function() {
+    //     console.log('我会用唾液清洗身体')
+    // }
+    // var guaiguai = new Cat('guaiguai', 'white')
+    // console.log(Cat.description)
+    // Cat.actingCute()
+    // console.log(guaiguai.description)
+    // guaiguai.cleanBody()
+    // console.log(guaiguai)
+
+    // for (key in guaiguai) {
+    //     if (guaiguai.hasOwnProperty(key)) {
+    //         console.log('自身', key)
+    //     } else {
+    //         console.log('原型', key)
+    //     }
+    // }
+    // console.log('~分隔符~')
+    // console.log(Object.keys(guaiguai))
+    // console.log(Object.getOwnPropertyNames(guaiguai))
+    //
+    //
+    // function Person(name, sex) {
+    //     this.name = name;
+    //     this.sex = sex;
+    //     var evil = '我很邪恶'
+    //     var pickNose = function() {
+    //         console.log('我会抠鼻屎但不让你看到')
+    //     }
+    //     this.drawing = function(type) {
+    //         console.log('我要画一幅'+type)
+    //     }
+    // }
+    // Person.fight = function() {
+    //     console.log('打架')
+    // }
+    // Person.prototype.wc = function () {
+    //     console.log('我也要上wc')
+    // }
+    // var p1 = new Person('Amy', 'girl')
+    //
+    // console.log(p1.name)
+    // console.log(p1.evil)
+    // p1.drawing('国画')
+    // p1.pickNose()
+    // p1.fight()
+    // p1.wc()
+    // Person.fight()
+    // Person.pickNose()
+    // console.log(Person.sex)
+
+    // class Cat {
+    //     constructor() {
+    //        // 在constructor中var一个变量，它只存在于constructor这个构造函数中
+    //         var heart = 'xin'
+    //        // 在constructor中使用this定义的属性和方法会被定义到实例上
+    //         this.name = 'Amy'
+    //         this.jump = function() {}
+    //     }
+    //     color = 'white'
+    //     // 在class中使用=来定义一个属性和方法，效果与第二点相同，会被定义到实例上
+    //     cleanBody = function() {
+    //         console.log('我会用唾液清洁身体')
+    //     }
+    //     // 在class中直接定义一个方法，会被添加到原型对象prototype上
+    //     sleep() {
+    //         console.log('是动物都会睡觉')
+    //     }
+    //     static actingCute () {
+    //         console.log(this)
+    //     }
+    // }
+    // var guaiguai = new Cat()
+    // console.log(guaiguai)
+    // console.log(Object.keys(guaiguai))
+    // guaiguai.cleanBody()
+    // guaiguai.sleep()
+    //
+    // Cat.actingCute()
+
+    class Cat {
+        constructor() {
+            this.name = 'Amy'
+            var type = 'constructor'
+        }
+        type = 'class'
+        getType = function() {
+            console.log(this.type)
+            console.log(type)
+        }
+    }
+    var type = 'window'
+    var guaiguai = new Cat()
+    guaiguai.getType()
+
+</script>
+</body>
+</html>
