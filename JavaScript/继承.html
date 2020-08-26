@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js继承</title>
+</head>
+<body>
+<script>
+    // 原型链继承
+    // function Parent () {
+    //     this.name = 'Parent'
+    //     this.sex = 'boy'
+    // }
+    // Parent.prototype.getName = function () {
+    //     console.log(this.name)
+    // }
+    // function Child () {
+    //     this.name = 'child'
+    // }
+    // Child.prototype = new Parent()
+    //
+    // var child1 = new Child()
+    // child1.getName()
+    // console.log(child1)
+
+    // function Parent (name) {
+    //     this.name = name
+    //     this.sex = 'boy'
+    //     this.colors = ['white', 'black']
+    // }
+    // function Child () {
+    //     this.feature = ['cute']
+    // }
+    // var parent = new Parent('parent')
+    //
+    //
+    // Child.prototype = parent
+    //
+    // var child1 = new Child('child1')
+    // console.log(child1)
+    //
+    // child1.sex = 'girl'
+    // child1.colors.push('yellow')
+    // child1.feature.push('sunshine')
+    //
+    // var child2 = new Child('child2')
+    //
+    // console.log(child1)
+    // console.log(child2)
+    //
+    // console.log(child1.name)
+    // console.log(child2.colors)
+    //
+    // console.log(parent)
+
+
+    // function Parent () {
+    //     this.name = 'parent'
+    // }
+    // function Child () {
+    //     this.sex = 'boy'
+    // }
+    // Child.prototype = new Parent()
+    // var child1 = new Child()
+    //
+    // console.log(child1 instanceof Child)
+    // console.log(child1 instanceof Parent)
+    // console.log(child1 instanceof Object)
+    // console.log(Child.prototype.isPrototypeOf(child1))
+    // console.log(Parent.prototype.isPrototypeOf(child1))
+    // console.log(Object.prototype.isPrototypeOf(child1))
+
+
+    // Object.prototype.getObj = function() {
+    //     console.log('obj')
+    // }
+    // function Parent(name) {
+    //     this.name = name
+    // }
+    // Parent.prototype.getName = function() {
+    //     console.log(this.name)
+    // }
+    // function Child(name) {
+    //     this.sex = 'boy'
+    //     Parent.call(this, name)
+    // }
+    // Child.prototype = new Parent()
+    //
+    // Child.prototype.getSex = function() {
+    //     console.log(this.sex)
+    // }
+    //
+    // var child1 = new Child('child1')
+    // var parent1 = new Parent('parent1')
+    // console.log(child1) // Child{ name: 'child1', sex: 'boy' }
+    // console.log(parent1)// Parent{ name: 'parent1' }
+    // child1.getName()    // 'child1'
+    // child1.getSex()     // 'boy'
+    // parent1.getName()   // 'parent1'
+    // child1.getObj()    //  'obj'
+    // parent1.getObj()   // 'obj'
+    // parent1.getSex()    // Uncaught TypeError: parent1.getSex is not a function
+
+    // function Cat() {
+    //     this.name = 'amy'
+    // }
+    //
+    // var c1 = new Cat();
+    // console.log(c1.constructor)
+    // console.log(Cat)
+    // console.log(Cat.prototype)
+
+
+    // var a;
+    // (function () {
+    //     function A () {
+    //         this.a = 1
+    //         this.b = 2
+    //     }
+    //     A.prototype.logA = function () {
+    //         console.log(this.a)
+    //     }
+    //     a = new A()
+    // }
+    // )()
+    // a.__proto__.logB = function() {
+    //     console.log(this.b)
+    // }
+    // console.log(a.constructor.prototype)
+    // a.logA()
+    // a.logB()
+
+    // function Parent (name, colors) {
+    //     this.name = name
+    //     this.colors = colors
+    // }
+    // Parent.prototype.features = ['cute']
+    // function Child (name, colors) {
+    //     this.sex = 'boy'
+    //     Parent.apply(this, [name, colors])
+    // }
+    // Child.prototype = new Parent()
+    // Child.prototype.constructor = Child
+    //
+    // var child1 = new Child('child1', ['white'])
+    // child1.colors.push('yellow')
+    // child1.features.push('sunshine')
+    // var child2 = new Child('child2', ['black'])
+    //
+    // console.log(child1)
+    // console.log(child2)
+    // console.log(Child.prototype)
+    //
+    // console.log(child1 instanceof Child)
+    // console.log(child1 instanceof Parent)
+
+    // function Parent (name) {
+    //     console.log(name) // 这里有个console.log()
+    //     this.name = name
+    // }
+    // function Child (name) {
+    //     Parent.call(this, name)
+    // }
+    // Child.prototype = new Parent()
+    // var child1 = new Child('child1')
+    //
+    // console.log(child1)
+    // console.log(Child.prototype)
+
+
+    // function Parent (name) {
+    //     this.name = name
+    // }
+    // Parent.prototype.features = ['cute']
+    // Parent.prototype.getFeatures = function () {
+    //     console.log(this.features)
+    // }
+    // function Child (name) {
+    //     this.sex = 'boy'
+    //     Parent.call(this, name)
+    // }
+    // // 与组合继承的区别
+    // Child.prototype = Object.create(Parent.prototype)
+    // Child.prototype.constructor = Child
+    //
+    // var child1 = new Child('child1')
+    // child1.features = ['sunshine']
+    // console.log(child1)
+    // child1.getFeatures()
+    // console.log(Child.prototype)
+    // console.log(Child.prototype.constructor)
+    // console.log(Child.__proto__)
+
+    // var cat = {
+    //     heart: '❤️',
+    //     colors: ['white', 'black']
+    // }
+    // function createAnother (original) {
+    //     var clone = Object.create(original);
+    //     clone.actingCute = function () {
+    //         console.log('我是一只会卖萌的猫咪')
+    //     }
+    //     return clone;
+    // }
+    // var guaiguai = createAnother(cat)
+    // var huaihuai = Object.create(cat)
+    //
+    // guaiguai.actingCute()
+    // console.log(guaiguai.heart)
+    // console.log(huaihuai.colors)
+    // console.log(guaiguai)
+    // console.log(huaihuai)
+
+    // function Parent (sex) {
+    //     this.sex = sex
+    // }
+    // Parent.prototype.getSex = function () {
+    //     console.log(this.sex)
+    // }
+    // function OtherParent (colors) {
+    //     this.colors = colors
+    // }
+    // OtherParent.prototype.getColors = function () {
+    //     console.log(this.colors)
+    // }
+    // function Child (sex, colors) {
+    //     Parent.call(this, sex)
+    //     OtherParent.call(this, colors) // 新增的父类
+    //     this.name = 'child'
+    // }
+    // Child.prototype = Object.create(Parent.prototype)
+    // Object.assign(Child.prototype, OtherParent.prototype) // 新增的父类原型对象
+    // Child.prototype.constructor = Child
+    //
+    // var child1 = new Child('boy', ['white'])
+    // child1.getSex()
+    // child1.getColors()
+    // console.log(child1)
+    // console.log(Child.prototype.__proto__ === Parent.prototype)
+    // console.log(Child.prototype.__proto__ === OtherParent.prototype)
+    // console.log(child1 instanceof Parent)
+    // console.log(child1 instanceof OtherParent)
+
+
+
+    // function Point(x, y) {
+    //     this.x = x;
+    //     this.y = y;
+    // }
+    //
+    // Point.prototype.toString = function () {
+    //     return '(' + this.x + ', ' + this.y + ')';
+    // };
+    //
+    // var p = new Point(1, 2);
+    // console.log(p.constructor)
+
+
+
+
+
+</script>
+</body>
+</html>

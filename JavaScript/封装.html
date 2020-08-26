@@ -113,20 +113,107 @@
     //
     // Cat.actingCute()
 
-    class Cat {
-        constructor() {
-            this.name = 'Amy'
-            var type = 'constructor'
+    // class Cat {
+    //     constructor() {
+    //         this.name = 'Amy'
+    //         var type = 'constructor'
+    //     }
+    //     type = 'class'
+    //     getType = function() {
+    //         console.log(this.type)
+    //         console.log(type)
+    //     }
+    // }
+    // var type = 'window'
+    // var guaiguai = new Cat()
+    // guaiguai.getType()
+
+
+    // class Parent {
+    //     constructor (name) {
+    //         this.name = name
+    //     }
+    //     getName () {
+    //         console.log(this.name)
+    //     }
+    // }
+    // class Child extends Parent {
+    //     constructor (name) {
+    //         super(name)
+    //         this.sex = 'boy'
+    //     }
+    // }
+    // var child1 = new Child('child1')
+    // console.log(child1)
+    // child1.getName()
+    //
+    // console.log(child1 instanceof Child)
+    // console.log(child1 instanceof Parent)
+
+    // class Parent {
+    //     constructor () {
+    //         this.name = 'parent'
+    //     }
+    // }
+    // class Child extends Parent {
+    //     constructor () {
+    //         // super(name) // 把super隐去
+    //     }
+    // }
+    // var child1 = new Child()
+    // console.log(child1)
+    // child1.getName()
+
+    // class Parent {
+    //     constructor () {
+    //         console.log(new.target.name)
+    //     }
+    // }
+    // class Child extends Parent {
+    //     constructor () {
+    //         var instance = super()
+    //         console.log(instance)
+    //         console.log(instance === this)
+    //     }
+    // }
+    // var child1 = new Child()
+    //
+    // var parent1 = new Parent()
+    //
+    // console.log(child1)
+    // console.log(parent1)
+
+    class Parent {
+        constructor (name) {
+            this.name = name
         }
-        type = 'class'
-        getType = function() {
-            console.log(this.type)
-            console.log(type)
+        getName () {
+            console.log(this.name)
         }
     }
-    var type = 'window'
-    var guaiguai = new Cat()
-    guaiguai.getType()
+    Parent.prototype.getSex = function () {
+        console.log('boy')
+    }
+    Parent.getColors = function () {
+        console.log(['white'])
+    }
+    class Child extends Parent {
+        constructor (name) {
+            super(name)
+            super.getName()
+        }
+        instanceFn () {
+            super.getSex()
+        }
+        static staticFn () {
+            super.getColors()
+        }
+    }
+    var child1 = new Child('child1')
+    child1.instanceFn()
+    Child.staticFn()
+    console.log(child1)
+
 
 </script>
 </body>
