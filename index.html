@@ -5,6 +5,22 @@
   <title>JStest</title>
 </head>
 <body>
-<script src="js/es6.js"></script>
+<!--<script src="js/es6.js"></script>-->
+<input type="text" id="text"/>
+<script>
+  const text = document.getElementById('text');
+  text.onclick = function (e) {
+  console.log('onclick')
+  }
+  text.onfocus = function (e) {
+  console.log('onfocus')
+  }
+  text.onmousedown = function (e) {
+  console.log('onmousedown')
+  }
+  text.onmouseenter = function (e) {
+  console.log('onmouseenter')
+  }
+</script>
 </body>
 </html>

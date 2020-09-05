@@ -4,29 +4,32 @@
   <meta charset="UTF-8">
   <title>盒模型</title>
   <style>
-    .box {
-      /*width: 200px;*/
+    .wcbox {
+      width: 200px;
       height: 100px;
       padding: 20px;
-      margin: 20px;
-      border: 1px solid black;
+      /*margin: 20px;*/
+      border: 1px solid purple;
+      box-sizing: content-box;
+      word-break: break-all;
     }
-    .ieBox {
-      /*width: 200px;*/
+    .IEBox {
+      width: 200px;
       height: 100px;
       padding: 20px;
-      margin: 20px;
-      border: 1px solid black;
+      /*margin: 20px;*/
+      border: 1px solid pink;
       box-sizing: border-box;
+      word-break: break-all;
     }
   </style>
 </head>
 <body>
-<div class="box">
-  <p>111111111111111111111111111111111111111111111111111111111111</p>
+<div class="wcbox">
+  111111111111111111111111111111111111111111111111111111111111
 </div>
-<div class="ieBox">
-  <p>111111111111111111111111111111111111111111111111111111111111</p>
+<div class="IEBox">
+  111111111111111111111111111111111111111111111111111111111111
 </div>
 </body>
 </html>
