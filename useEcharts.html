@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图表</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+    <script src="https://lib.baomitu.com/echarts/4.7.0/echarts-en.common.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            padding: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+<div id="main" style="width: 100%;height:20rem;"></div>
+<div id="bing" style="width: 100%;height:20rem;"></div>
+<!--<div id="zhe" style="width: 100%;height:20rem;"></div>-->
+<div class="1212">1212212</div>
+<script type="text/javascript">
+    var xData = ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"];
+    var checkName = xData[0];
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var bingChart = echarts.init(document.getElementById('bing'));
+    // var zheChart = echarts.init(document.getElementById('zhe'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {
+            show: false
+        },
+        // legend: {
+        //     data:['销量']
+        // },
+        xAxis: {
+            name: '单位',
+            nameLocation: 'end',
+            nameTextStyle: {
+                align: 'center',
+                fontsize: 12
+            },
+            data: xData
+        },
+        yAxis: {
+            name: '1111',
+            nameLocation: 'end',
+            nameTextStyle: {
+                align: 'center',
+                fontsize: 12
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#999'
+                }
+            }
+        },
+        series: [{
+            name: '销量',
+            type: 'bar',
+            emphasis: {
+                label: {
+                    show: true,
+                    position: 'top',
+                },
+                itemStyle: {
+                    color: 'blue'
+                }
+            },
+            // label:{
+            //     show: true,
+            //     position: 'top',
+            //     color: function(param) {
+            //         if(checkName  === params.name){
+            //             return 'red';
+            //         }else {
+            //             return '#fff';
+            //         }
+            //     }
+            // },
+            // itemStyle: {
+            //     normal: {
+            //         color: function (params){
+            //             //判断选中的名字改变柱子的颜色样式
+            //             if(checkName  === params.name){
+            //                 return 'red';
+            //             }else {
+            //                 return 'blue';
+            //             }
+            //         }
+            //     }
+            // },
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    var option1 = {
+        series: {
+            type: 'pie',
+            data: [
+                {name: 'A', value: 1212},
+                {name: 'B', value: 2323},
+                {name: 'C', value: 1919}
+            ]
+        }
+    }
+    bingChart.setOption(option1)
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    myChart.on('click', function (params) {
+        // 控制台打印数据的名称
+        checkName = params.name;
+        myChart.setOption(option);
+        console.log(params.dataIndex);
+        const index = params.dataIndex;
+        option1.series.data = [
+            {name: '哈哈'+index, value: 2000},
+            {name: '111'+index, value: 3000},
+            {name: '222'+index, value: 1000},
+            {name: '333'+index, value: 3000},
+        ]
+        bingChart.setOption(option1);
+
+    });
+
+</script>
+</body>
+</html>
