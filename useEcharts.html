@@ -30,7 +30,8 @@
 <div class="1212">1212212</div>
 <script type="text/javascript">
     var xData = ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"];
-    var checkName = xData[0];
+    var yData = [5.3, 20.22, 36.555, 10.2, 10.1, 20];
+    // var checkName = xData[0];
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
     var bingChart = echarts.init(document.getElementById('bing'));
@@ -39,25 +40,39 @@
     // 指定图表的配置项和数据
     var option = {
         title: {
-            text: 'ECharts 入门示例'
+            text: ''
         },
         tooltip: {
             show: false
         },
-        // legend: {
-        //     data:['销量']
-        // },
+        legend: {
+            data: xData,
+            show: true,
+            selected: {
+                "衬衫": true,
+                '羊毛衫': false,
+                '雪纺衫': false,
+                '裤子': false,
+                '高跟鞋': false,
+                '袜子': false
+            },
+            selectedMode:'single' // 设置单选多选模式
+        },
         xAxis: {
-            name: '单位',
+            name: '日期',
             nameLocation: 'end',
             nameTextStyle: {
                 align: 'center',
                 fontsize: 12
             },
+            axisLabel: {
+                interval:0,
+                rotate:40
+            },
             data: xData
         },
         yAxis: {
-            name: '1111',
+            name: '每日油耗',
             nameLocation: 'end',
             nameTextStyle: {
                 align: 'center',
@@ -72,72 +87,143 @@
         series: [{
             name: '销量',
             type: 'bar',
+            barWidth: '40%',
             emphasis: {
                 label: {
                     show: true,
                     position: 'top',
+                    padding: [3, 4],
+                    borderRadius: 4,
+                    backgroundColor: '#B8CDF8',
+                    color: '#ffffff',
                 },
                 itemStyle: {
-                    color: 'blue'
+                    color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
+                        offset: 0,
+                        color: "#87A0E3" // 0% 处的颜色
+                    },{
+                        offset: 1,
+                        color: "#BDD2FA" // 100% 处的颜色
+                    }], false)
                 }
             },
-            // label:{
-            //     show: true,
-            //     position: 'top',
-            //     color: function(param) {
-            //         if(checkName  === params.name){
-            //             return 'red';
-            //         }else {
-            //             return '#fff';
-            //         }
-            //     }
-            // },
-            // itemStyle: {
-            //     normal: {
-            //         color: function (params){
-            //             //判断选中的名字改变柱子的颜色样式
-            //             if(checkName  === params.name){
-            //                 return 'red';
-            //             }else {
-            //                 return 'blue';
-            //             }
-            //         }
-            //     }
-            // },
-            data: [5, 20, 36, 10, 10, 20]
+            markPoint: {
+                symbol: 'circle',
+            },
+            itemStyle: {
+                normal: {
+                    color: '#D9E0EE',
+                    barBorderRadius: [10, 10, 0, 0]
+                }
+            },
+            data: yData
         }]
-    };
+    }
 
     var option1 = {
-        series: {
-            type: 'pie',
-            data: [
-                {name: 'A', value: 1212},
-                {name: 'B', value: 2323},
-                {name: 'C', value: 1919}
-            ]
-        }
+        legend: {
+            // orient: 'vertical',
+            // right: '0',
+            // top: '25%',
+            width: '80%',
+            data: ['电机电耗', 'DCAC电耗', 'DCDC电耗', '空调电耗', 'PTC电耗'],
+            itemWidth: 10,
+            itemHeight: 10,
+            selectedMode: false,
+            textStyle: {
+                fontSize: 12
+            },
+            name: '电量消耗'
+        },
+        color: ['#C5D6FF', '#9DB6F0', '#7A93D6', '#5F75AF', '#4D5E8D'],
+        series: [
+            {
+                name: '电量消耗',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                // left: '-40%',
+                top: '10%',
+                label: {
+                    show: true,
+                    position: 'outside',
+                    formatter: '{d}%',
+                    rotate: 10,
+                    fontSize: 14,
+                },
+                labelLine: {
+                    show: true,
+                    length: 4,
+                    length2: 4,
+                },
+                data: [
+                    {
+                        value: 10,
+                        name: '电机电耗'
+                    },
+                    {
+                        value: 10,
+                        name: 'DCAC电耗'
+                    },
+                    {
+                        value: 10,
+                        name: 'DCDC电耗'
+                    },
+                    {
+                        value: 50,
+                        name: '空调电耗'
+                    },
+                    {
+                        value: 20,
+                        name: 'PTC电耗'
+                    }
+                ]
+            }
+        ]
     }
     bingChart.setOption(option1)
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
+    myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: 0});
+    // myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: 1});
+    // myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: 2});
+    // myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: 3});
+    // myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: 4});
 
-    myChart.on('click', function (params) {
-        // 控制台打印数据的名称
-        checkName = params.name;
-        myChart.setOption(option);
-        console.log(params.dataIndex);
-        const index = params.dataIndex;
-        option1.series.data = [
-            {name: '哈哈'+index, value: 2000},
-            {name: '111'+index, value: 3000},
-            {name: '222'+index, value: 1000},
-            {name: '333'+index, value: 3000},
-        ]
-        bingChart.setOption(option1);
 
-    });
+    myChart.getZr().on('click', function(params) {
+        const pointInPixel = [params.offsetX, params.offsetY]
+        if (myChart.containPixel('grid', pointInPixel)) {
+            let xIndex = myChart.convertFromPixel({ seriesIndex: 0 }, [params.offsetX, params.offsetY])[0]
+            myChart.dispatchAction({type: 'downplay'});
+            myChart.dispatchAction({type: 'highlight',seriesIndex: 0,dataIndex: xIndex});
+            option1.series.data = [
+                {
+                    value: 30,
+                    name: '电机电耗'
+                },
+                {
+                    value: 5,
+                    name: 'DCAC电耗'
+                },
+                {
+                    value: 20,
+                    name: 'DCDC电耗'
+                },
+                {
+                    value: 15,
+                    name: '空调电耗'
+                },
+                {
+                    value: 30,
+                    name: 'PTC电耗'
+                }
+            ]
+            bingChart.setOption(option1);
+        }
+    })
+
 
 </script>
 </body>
