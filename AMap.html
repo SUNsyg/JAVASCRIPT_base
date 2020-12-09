@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高德地图</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <script>
+        var initFontSize = function() {
+            var _viewportWidth;
+            var lock = false;
+            var _htmlNode = document.getElementsByTagName('html')[0];
+            var _scrollWidth = window.innerWidth || screen.availWidth || document.documentElement.scrollWidth;
+            // var _scrollHeight = (screen.height > 0) ? (window.innerHeight >= screen.height || window.innerHeight == 0) ? screen.height : window.innerHeight : window.innerHeight
+            var maxWidth = 750;
+            // _viewportWidth = _scrollHeight > _scrollWidth ? _scrollWidth : _scrollHeight;
+            _htmlNode.style.fontSize = '100px';
+            if (_scrollWidth < 150 || _scrollWidth > 750) {
+                setTimeout(function() {
+                    !lock && initFontSize();
+                    lock = true;
+                }, 200)
+            } else {
+                _htmlNode.style.fontSize = _scrollWidth / maxWidth * 100 + 'px';
+            }
+        }
+        initFontSize();
+        window.onresize = function(){
+            initFontSize();
+        }
+    </script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            width: 100%;
+            height: 10rem;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=9837b36cf00ed72bc20ef1bbc01236b0"></script>
+<script>
+
+    // 经纬度
+    // var position = new AMap.LngLat(116, 39);//标准写法
+    // var position = [116, 39]; //简写
+
+    var centerLocal = new AMap.LngLat(116.397428, 39.90923);
+    var map = new AMap.Map('container', {
+        zoom:11,//级别
+        center: centerLocal,//中心点坐标
+        layers: [//使用多个图层
+            // new AMap.TileLayer.Satellite(),
+            // new AMap.TileLayer.RoadNet()
+        ],
+        viewMode:'3D'//使用3D视图
+    });
+    AMap.plugin(['AMap.ToolBar', 'AMap.Driving', 'AMap.DragRoute'],function(){//异步加载插件
+        var toolbar = new AMap.ToolBar();
+        map.addControl(toolbar);
+
+        var driving = new AMap.Driving({
+            policy: AMap.DrivingPolicy.LEAST_TIME
+        });//驾车路线规划
+
+        var startLngLat = [116.379028, 39.865042]
+        var endLngLat = [116.427281, 39.903719]
+        driving.search(startLngLat, endLngLat, function(status, result) {
+            // 未出错时，result即是对应的路线规划方案
+            console.log(status)
+            console.log(result)
+        })
+
+        // path 是驾车导航的起、途径和终点，最多支持16个途经点
+        var path = []
+
+        path.push([116.303843, 39.983412])
+        // path.push([116.321354, 39.896436])
+        path.push([116.407012, 39.992093])
+
+        var route = new AMap.DragRoute(map, path, AMap.DrivingPolicy.LEAST_FEE)
+        // 查询导航路径并开启拖拽导航
+        route.search()
+
+    });
+
+    var lineArr = [
+        [116.368904, 39.913423],
+        [116.382122, 39.901176],
+        // [116.387271, 39.912501],
+        // [116.398258, 39.904600]
+    ];
+    var polyline = new AMap.Polyline({
+        path: lineArr,          //设置线覆盖物路径
+        // strokeColor: "#3366FF", //线颜色
+        strokeWeight: 5,        //线宽
+        strokeStyle: "solid",   //线样式
+        lineJoin: 'round',
+        lineCap: 'round',
+    });
+    map.add(polyline);
+
+    var icon = new AMap.Icon({
+        size: new AMap.Size(40, 50),    // 图标尺寸
+        image: '//webapi.amap.com/theme/v1.3/images/newpc/way_btn2.png',  // Icon的图像
+        imageOffset: new AMap.Pixel(0, -60),  // 图像相对展示区域的偏移量，适于雪碧图等
+        imageSize: new AMap.Size(40, 50)   // 根据所设置的大小拉伸或压缩图片
+    });
+    var marker1 = new AMap.Marker({
+        icon: icon,
+        position:[116.368904, 39.913423],//位置 new AMap.LngLat(116.39, 39.9)
+    })
+    var marker2 = new AMap.Marker({
+        icon: icon,
+        position:[116.382122, 39.901176]//位置 new AMap.LngLat(116.39, 39.9)
+    })
+    var markerList = [marker1, marker2];
+    map.add(marker1);//添加到地图
+    // map.remove(markerList)
+
+    //实时路况图层
+    var trafficLayer = new AMap.TileLayer.Traffic({
+        zIndex: 10
+    });
+    // map.add(trafficLayer);//添加图层到地图
+
+
+</script>
+</body>
+</html>

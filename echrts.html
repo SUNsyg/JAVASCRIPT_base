@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>H5中使用地图</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+
+    <script>
+        var initFontSize = function() {
+            var _viewportWidth;
+            var lock = false;
+            var _htmlNode = document.getElementsByTagName('html')[0];
+            var _scrollWidth = window.innerWidth || screen.availWidth || document.documentElement.scrollWidth;
+            // var _scrollHeight = (screen.height > 0) ? (window.innerHeight >= screen.height || window.innerHeight == 0) ? screen.height : window.innerHeight : window.innerHeight
+            var maxWidth = 750;
+            // _viewportWidth = _scrollHeight > _scrollWidth ? _scrollWidth : _scrollHeight;
+            _htmlNode.style.fontSize = '100px';
+            if (_scrollWidth < 150 || _scrollWidth > 750) {
+                setTimeout(function() {
+                    !lock && initFontSize();
+                    lock = true;
+                }, 200)
+            } else {
+                _htmlNode.style.fontSize = _scrollWidth / maxWidth * 100 + 'px';
+            }
+        }
+        initFontSize();
+        window.onresize = function(){
+            initFontSize();
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 0.12rem;
+        }
+
+        #iCenter {
+            width: 95%;
+            height: 5rem;
+            border: 0.01rem #000 solid;
+            margin: 0.2rem auto;
+        }
+    </style>
+</head>
+<body>
+<div id="iCenter"></div>
+<div class="mui-card">
+    <form class="mui-input-group">
+        <div class="mui-input-row">
+            <label><span class="mui-icon mui-icon-paperplane" style="font-size: medium;"></span>签到时间：</label>
+            <label id="attentime"></label>
+        </div>
+        <div class="mui-input-row">
+            <label> <span class="mui-icon mui-icon-location-filled" style="font-size: medium;"></span>签到地点：</label>
+            <label id="addr"></label>
+        </div>
+    </form>
+</div>
+
+<div class="mui-card" style="height: 20%;">
+    <div class=" mui-card-media">
+        <img class="a" id="img" />
+        <label for="myFile">
+            <span id="format" class="a mui-icon mui-icon-camera" style="font-size: -webkit-xxx-large;"></span>
+        </label>
+        <input style="display: none;" type="file" capture="camera" id="myFile" onchange="upload('#myFile', '#img');" />
+    </div>
+</div>
+<div style="background: #e0e0e0;">
+    <button id="succbtn" type="button" class="mui-btn mui-btn-link mui-text-center" style="width: 100%;font-size: large;background: #e0e0e0; position: fixed;bottom:0px;">提交</button>
+
+</div>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=9837b36cf00ed72bc20ef1bbc01236b0"></script>
+<script type="text/javascript">
+    /**
+     * 定位
+     */
+    var mapObj = new AMap.Map('iCenter', {
+        resizeEnable: true,
+        center: [116.397428, 39.90923],//地图中心点
+        zoom: 10 //地图显示的缩放级别
+    });
+    var driving = new AMap.Driving({
+        map: mapObj,
+        panel: "panel"
+    });
+    driving.search(new AMap.LngLat(116.379028, 39.865042), new AMap.LngLat(116.427281, 39.903719));
+    // mapObj.plugin('AMap.Geolocation', function() {
+    //     geolocation = new AMap.Geolocation({
+    //         enableHighAccuracy: true, // 是否使用高精度定位，默认:true
+    //         timeout: 10000, // 超过10秒后停止定位，默认：无穷大
+    //         maximumAge: 0, // 定位结果缓存0毫秒，默认：0
+    //         convert: true, // 自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+    //         showButton: true, // 显示定位按钮，默认：true
+    //         buttonPosition: 'LB', // 定位按钮停靠位置，默认：'LB'，左下角
+    //         buttonOffset: new AMap.Pixel(10, 20), // 定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+    //         showMarker: true, // 定位成功后在定位到的位置显示点标记，默认：true
+    //         showCircle: true, // 定位成功后用圆圈表示定位精度范围，默认：true
+    //         panToLocation: true, // 定位成功后将定位到的位置作为地图中心点，默认：true
+    //         zoomToAccuracy: true // 定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+    //     });
+    //     mapObj.addControl(geolocation);
+    //     geolocation.getCurrentPosition();
+    //     // AMap.event.addListener(geolocation, 'complete', onComplete); // 返回定位信息
+    //     // AMap.event.addListener(geolocation, 'error', onError); // 返回定位出错信息
+    // });
+
+    function onComplete(obj) {
+        // var res = '经纬度：' + obj.position +
+        // 	'\n精度范围：' + obj.accuracy +
+        // 	'米\n定位结果的来源：' + obj.location_type +
+        // 	'\n状态信息：' + obj.info +
+        // 	'\n地址：' + obj.formattedAddress +
+        // 	'\n地址信息：' + JSON.stringify(obj.addressComponent, null, 4);
+        var addr = obj.formattedAddress;
+
+        document.getElementById("addr").innerText = addr;
+        localStorage.setItem('addr', addr);
+    };
+
+    function onError(obj) {
+        // alert(obj.info + '--' + obj.message);
+        console.log(obj);
+    };
+</script>
+
+
+
+</body>
+</html>
