@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>h5中生成图片</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <script>
+        var initFontSize = function() {
+            var _viewportWidth;
+            var lock = false;
+            var _htmlNode = document.getElementsByTagName('html')[0];
+            var _scrollWidth = window.innerWidth || screen.availWidth || document.documentElement.scrollWidth;
+            // var _scrollHeight = (screen.height > 0) ? (window.innerHeight >= screen.height || window.innerHeight == 0) ? screen.height : window.innerHeight : window.innerHeight
+            var maxWidth = 750;
+            // _viewportWidth = _scrollHeight > _scrollWidth ? _scrollWidth : _scrollHeight;
+            _htmlNode.style.fontSize = '100px';
+            if (_scrollWidth < 150 || _scrollWidth > 750) {
+                setTimeout(function() {
+                    !lock && initFontSize();
+                    lock = true;
+                }, 200)
+            } else {
+                _htmlNode.style.fontSize = _scrollWidth / maxWidth * 100 + 'px';
+            }
+        }
+        initFontSize();
+        window.onresize = function(){
+            initFontSize();
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #canvasBox {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<button onclick="showCanvas()">展示canvas</button>
+<div id="canvasBox">
+    <canvas id="thecanvas"></canvas>
+    <button id="downloadImageBtn">保存图片</button>
+</div>
+<div id="imgBox"></div>
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/vConsole/3.3.4/vconsole.min.js"></script>
+<script>
+    window.onload = function() {
+        draw();
+        var dlButton = document.getElementById('downloadImageBtn')
+        bindButtonEvent(dlButton, "click", saveImageInfo)
+    }
+
+    function showCanvas() {
+        $('#canvasBox').show()
+        $('#canvasBox').width = document.documentElement.clientWidth;
+        $('#canvasBox').height = document.documentElement.clientHeight;
+    }
+    function draw() {
+        var canvas = document.getElementById('thecanvas')
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "rgba(125, 46, 138, 0.5)";
+        ctx.fillRect(25,25,100,100);
+    }
+    function bindButtonEvent(e, type, handler) {
+        if (e.addEventListener) {
+            e.addEventListener(type, handler, false)
+        } else {
+            e.addEventListener('on'+type, handler)
+        }
+    }
+
+    function saveImageInfo() {
+        var mycanvas = document.getElementById('thecanvas');
+        var image = mycanvas.toDataURL("image/png");
+        // var w = window.open('about:blank', 'image from canvas')
+        // window.document.write("<img src='"+image+"' alt='from canvas'/>")
+        var html = "<img src='"+image+"' alt='from canvas'/>";
+        $('#imgBox').html(html)
+        downloadimg(image)
+    }
+
+    function saveAsLocalImage() {
+        var myCanvas = document.getElementById('thecanvas');
+        var image = myCanvas.toDataURL("image/png").replace("image/png", 'image/octet-stream');
+        console.log(image)
+        // window.location.href = image;
+    }
+
+    function downloadimg(src) {
+        // var img = $('.box').children('img').attr("src");
+        var alink = document.createElement("a");
+        alink.href = src;
+        alink.download = "新年快乐.png";
+        alink.click();
+    }
+
+
+    var vconsole = new VConsole()
+</script>
+</body>
+</html>
