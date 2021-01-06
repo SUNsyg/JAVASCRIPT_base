@@ -68,50 +68,50 @@
         ],
         viewMode:'3D'//使用3D视图
     });
-    AMap.plugin(['AMap.ToolBar', 'AMap.Driving', 'AMap.DragRoute'],function(){//异步加载插件
-        var toolbar = new AMap.ToolBar();
-        map.addControl(toolbar);
+    // AMap.plugin(['AMap.ToolBar', 'AMap.Driving', 'AMap.DragRoute'],function(){//异步加载插件
+    //     var toolbar = new AMap.ToolBar();
+    //     map.addControl(toolbar);
+    //
+    //     var driving = new AMap.Driving({
+    //         policy: AMap.DrivingPolicy.LEAST_TIME
+    //     });//驾车路线规划
+    //
+    //     var startLngLat = [116.379028, 39.865042]
+    //     var endLngLat = [116.427281, 39.903719]
+    //     driving.search(startLngLat, endLngLat, function(status, result) {
+    //         // 未出错时，result即是对应的路线规划方案
+    //         console.log(status)
+    //         console.log(result)
+    //     })
+    //
+    //     // path 是驾车导航的起、途径和终点，最多支持16个途经点
+    //     var path = []
+    //
+    //     path.push([116.303843, 39.983412])
+    //     // path.push([116.321354, 39.896436])
+    //     path.push([116.407012, 39.992093])
+    //
+    //     var route = new AMap.DragRoute(map, path, AMap.DrivingPolicy.LEAST_FEE)
+    //     // 查询导航路径并开启拖拽导航
+    //     route.search()
+    //
+    // });
 
-        var driving = new AMap.Driving({
-            policy: AMap.DrivingPolicy.LEAST_TIME
-        });//驾车路线规划
-
-        var startLngLat = [116.379028, 39.865042]
-        var endLngLat = [116.427281, 39.903719]
-        driving.search(startLngLat, endLngLat, function(status, result) {
-            // 未出错时，result即是对应的路线规划方案
-            console.log(status)
-            console.log(result)
-        })
-
-        // path 是驾车导航的起、途径和终点，最多支持16个途经点
-        var path = []
-
-        path.push([116.303843, 39.983412])
-        // path.push([116.321354, 39.896436])
-        path.push([116.407012, 39.992093])
-
-        var route = new AMap.DragRoute(map, path, AMap.DrivingPolicy.LEAST_FEE)
-        // 查询导航路径并开启拖拽导航
-        route.search()
-
-    });
-
-    var lineArr = [
-        [116.368904, 39.913423],
-        [116.382122, 39.901176],
-        // [116.387271, 39.912501],
-        // [116.398258, 39.904600]
-    ];
-    var polyline = new AMap.Polyline({
-        path: lineArr,          //设置线覆盖物路径
-        // strokeColor: "#3366FF", //线颜色
-        strokeWeight: 5,        //线宽
-        strokeStyle: "solid",   //线样式
-        lineJoin: 'round',
-        lineCap: 'round',
-    });
-    map.add(polyline);
+    // var lineArr = [
+    //     [116.368904, 39.913423],
+    //     [116.382122, 39.901176],
+    //     // [116.387271, 39.912501],
+    //     // [116.398258, 39.904600]
+    // ];
+    // var polyline = new AMap.Polyline({
+    //     path: lineArr,          //设置线覆盖物路径
+    //     // strokeColor: "#3366FF", //线颜色
+    //     strokeWeight: 5,        //线宽
+    //     strokeStyle: "solid",   //线样式
+    //     lineJoin: 'round',
+    //     lineCap: 'round',
+    // });
+    // map.add(polyline);
 
     var icon = new AMap.Icon({
         size: new AMap.Size(40, 50),    // 图标尺寸
@@ -128,7 +128,7 @@
         position:[116.382122, 39.901176]//位置 new AMap.LngLat(116.39, 39.9)
     })
     var markerList = [marker1, marker2];
-    map.add(marker1);//添加到地图
+    map.add(markerList);//添加到地图
     // map.remove(markerList)
 
     //实时路况图层

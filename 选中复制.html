@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="text">复制</div>
+<script>
+    const selection = window.getSelection();
+    const range = document.createRange();
+    var element = document.getElementById('text')
+    range.selectNodeContents(element);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    selectedText = selection.toString();
+
+</script>
+</body>
+</html>
