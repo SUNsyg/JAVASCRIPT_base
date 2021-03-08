@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>简要轮播</title>
+  <style>
+    .div {
+      width: 200px;
+      height: 200px;
+      background: lightcoral;
+      position: relative;
+    }
+    .item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index:0;
+      display: none;
+    }
+    .active {
+      display: block;
+      z-index: 4;
+      background: lightblue;
+    }
+  </style>
+</head>
+<body>
+<div class="div" id="box">
+  <div class="item active">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+  <div class="item">4</div>
+</div>
+<script>
+  var num = 0;
+  var oDiv = document.getElementById('box')
+  var oItem = document.getElementsByClassName('item')
+
+var t;
+
+  oDiv.onmouseenter = function() {
+    t = setInterval(move, 1000)
+  }
+  oDiv.onmouseleave = function() {
+    clearInterval(t)
+  }
+
+  function move() {
+    num++;
+    if (num === oItem.length) {
+      num = 0
+    }
+    show(num)
+  }
+  function show(num) {
+    console.log(num)
+    for (var i=0;i<oItem.length;i++){
+      oItem[i].classList.remove('active')
+    }
+    oItem[num].className = "item active"
+  }
+</script>
+</body>
+</html>

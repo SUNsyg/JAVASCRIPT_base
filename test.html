@@ -5,6 +5,27 @@
   <title>测试</title>
 </head>
 <body>
-<script src="js/test.js"></script>
+
+<!--<script src="js/test.js"></script>-->
+<script>
+  // 数字没三位加1个逗号
+  function format(num) {
+    if (num == null) {
+      return
+    }
+    let n = parseInt(num).toString();
+    let len = n.length;
+    if (len < 3) { return}
+    let m = len % 3;
+    console.log(n)
+    console.log(m)
+    if (m > 0) {
+      return n.slice(0, m) + ',' + n.slice(m, len).match(/\d{3}/g).join(",")
+    } else {
+      return n.slice(m, len).match(/\d{3}/g).join(",")
+    }
+  }
+  console.log(format(232391))
+</script>
 </body>
 </html>
