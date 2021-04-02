@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ES6</title>
+</head>
+<body>
+<p>在js中数组和对象都是引用类型，所以是否可以去修改const定义的数组或者对象</p>
+<script>
+  let a = 2;
+  a = 4;
+  console.log(a)
+
+  const b = 2;
+  // b = 3;
+  // console.log(b)
+
+  const arr = [1,2,3,{a:1}]
+  const obj = {
+    a: 1,
+    b: 2,
+    c: 3
+  }
+  arr[0] = 'aaa'
+  arr[3].a = 'aaa'
+  obj.a = '1111'
+  console.log(arr)
+  console.log(obj)
+
+
+
+  // (function () {
+  //   var tmp = '111'
+  //   console.log(tmp)
+  // }());
+
+  var tmp = '2222';
+  function changTmp() {
+    console.log(tmp) // undefined
+    if (false) {
+      var tmp = '1'
+    }
+    console.log('end', tmp) // undefined
+  }
+  changTmp()
+
+  console.log(e)
+</script>
+</body>
+</html>
