@@ -6,6 +6,7 @@
 </head>
 <body>
 <p>在js中数组和对象都是引用类型，所以是否可以去修改const定义的数组或者对象</p>
+<p>for循环，设置循环变量那一部分是父级作用域，循环体内部是一个单独的子作用域。</p>
 <script>
   let a = 2;
   a = 4;
@@ -44,7 +45,54 @@
   }
   changTmp()
 
-  console.log(e)
+
+  console.log(window.a) // undefined
+  console.log(window.tmp) // 2222
+  // if (true) {
+  //   temp = 'template'
+  //   console.log(typeof temp)
+  //
+  //   let temp;
+  //
+  //   console.log(typeof temp)
+  // }
+
+
+  // function f() {
+  //   let n = 10;
+  //   if (true) {
+  //     let n = 5;
+  //   }
+  //   console.log(n)
+  // }
+  // f()
+
+
+  // function f() { console.log('I am outside!'); }
+  //
+  // (function () {
+  //   if (false) {
+  //     // 重复声明一次函数f
+  //     function f() { console.log('I am inside!'); }
+  //   }
+  //
+  //   f();
+  // }());
+
+  const foo = Object.freeze({})
+  foo.age = 26;
+  console.log(foo)
+
+  var constantize = (obj) => {
+    Object.freeze(obj);
+    Object.keys(obj).forEach( (key, i) => {
+      if ( typeof obj[key] === 'object' ) {
+        constantize( obj[key] );
+      }
+    });
+  };
+
+  console.log(this)
 </script>
 </body>
 </html>
