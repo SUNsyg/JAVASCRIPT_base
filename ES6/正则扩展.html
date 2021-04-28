@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>正则扩展</title>
+</head>
+<body>
+<script>
+// 先行断言
+console.log(/\d+(?=%)/.exec('100% of US presidents have been male'))
+console.log(/\d+(?!%)/.exec('that’s all 44 of them'))
+console.log(/\d+(?!%)/.exec('that’s all 44% of them'))
+
+// 后行断言
+  console.log(/(?<=\$)\d+/.exec('Benjamin Franklin is on the $100 bill'))
+  console.log(/(?<!\$)\d+/.exec('it’s is worth about €90'))
+  console.log(/(?<!\$)\d+/.exec('it’s is worth about $90'))
+
+  var str = 'zabbcabdef'
+  var re = /ab/
+  const result = re.exec(str);
+
+  console.log(result)
+  console.log(result.index)
+  console.log(result.indices)
+
+  var str1 = 'test1test2test3';
+  var re1 = /t(e)(st(\d?))/g;
+  var matches = [];
+  var match;
+  while (match = re1.exec(str1)) {
+    matches.push(match)
+  }
+  console.log(matches)
+
+//  遍历器转为数组是非常简单的，使用...运算符和Array.from()方法就可以了。
+    // 转为数组的方法一
+    // [...string.matchAll(regex)]
+
+// 转为数组的方法二
+// Array.from(string.matchAll(regex))
+
+</script>
+</body>
+</html>
