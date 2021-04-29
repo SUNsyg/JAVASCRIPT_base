@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数值的扩展</title>
+</head>
+<body>
+<script>
+  console.log(Number.isFinite(15.3))
+
+  console.log(Number.isNaN(NaN))
+
+
+//  es5写法
+  console.log(parseInt('12.34'))
+  console.log(parseFloat('12.34#'))
+
+//  es6写法
+  console.log(Number.parseInt('12.34'))
+  console.log(Number.parseFloat('12.345#'))
+
+  console.log(Number.isInteger(23.4))
+  console.log(Number.isInteger(23.0))
+  console.log(Number.isInteger(23))
+
+//  Math
+  console.log(Math.trunc(23.2))
+
+  // 判断一个值是正数、负数、还是0
+  console.log(Math.sign(0.2))
+  console.log(Math.sign(NaN))
+
+</script>
+</body>
+</html>
