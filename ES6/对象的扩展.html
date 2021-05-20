@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>对象的扩展</title>
+</head>
+<body>
+<script>
+  const foo = 'bar';
+  const baz = {foo};
+  console.log(baz)
+
+  const o = {
+    method() {
+      return 'Hello!'
+    }
+  }
+  console.log(o.method())
+
+  let propKey = 'foo'
+  let obj = {
+    [propKey]: true,
+    ['a' + 'bc']: 123
+  };
+
+  const person = {
+    sayName() {
+      console.log('hello!');
+    },
+  };
+  console.log(person.sayName.name)
+
+  const nameObj = {
+    get foo() {},
+    set foo(x) {}
+  };
+  // console.log(nameObj.foo.name)
+
+  const descriptor = Object.getOwnPropertyDescriptor(nameObj, 'foo');
+  console.log(descriptor.get.name)
+  console.log(descriptor.set.name)
+
+  console.log(Reflect.ownKeys({ [Symbol()]: 0, b:0, 10:0, 2: 0, a:0 }))
+
+  const proto = {
+    foo: 'hello'
+  }
+  const obj1 = {
+    foo: 'world',
+    // bar: super.foo,
+    find() {
+      return super.foo; // super 指向当前对象的原型对象。
+    }
+  };
+  Object.setPrototypeOf(obj1, proto);
+  obj1.find()
+  // console.log(obj1.bar) // 报错
+
+
+  let o1 = {a:1}
+  let o2 = {b:2}
+  o2.__proto__ = o1;
+  let { ...o3 } = o2;
+  console.log(o3)
+  console.log(o3.a)
+
+  // 如果想clone一个对象，还拷贝对象原型的属性
+  const clone1 = Object.assign(
+      Object.create(Object.getPrototypeOf(obj1)),
+      obj1
+  )
+  const clone2 = Object.create(
+      Object.getPrototypeOf(obj),
+      Object.getOwnPropertyDescriptor(obj)
+  )
+
+  var message = {
+    headerText: 0,
+    body: {
+      user: {
+        firstName: '1111'
+      },
+      hi() {
+        console.log("链判断运算符是否执行")
+      }
+    }
+  }
+  const firstName = message?.body?.user?.firstName || 'default'
+  console.log(firstName)
+  message.body.hi?.()
+
+  const headerText = message.headerText || '不存在吗？'
+  console.log(headerText)
+
+
+
+
+
+
+</script>
+</body>
+</html>
