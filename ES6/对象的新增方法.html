@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>对象的新增方法</title>
+</head>
+<body>
+<script>
+  console.log(Object.is('foo', 'foo'))
+  console.log(Object.is({}, {}))
+
+  const noObj = Object.assign(2)
+  console.log(noObj)
+
+  const arrObj = Object.assign([1, 2, 3], [4, 5])
+  console.log(arrObj)
+
+  const obj = {
+    foo: 123,
+    get bar() {
+      return 'abc'
+    }
+  }
+  console.log(Object.getOwnPropertyDescriptors(obj))
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
