@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Class的基本用法</title>
+</head>
+<body>
+<script>
+  // function Point(x, y) {
+  //   this.x = x;
+  //   this.y = y;
+  // }
+  //
+  // Point.prototype.toString = function() {
+  //   return '(' + this.x + ',' + this.y + ')';
+  // };
+  // var p = new Point(1, 2)
+  // console.log(p)
+
+
+  class Point {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+
+    toString() {
+      return '(' + this.x + ',' + this.y + ')';
+    }
+    doStuff() {
+      console.log('stuff');
+    }
+  }
+
+  const p = new Point();
+  p.doStuff()
+
+
+
+
+</script>
+</body>
+</html>
