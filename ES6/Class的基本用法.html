@@ -17,6 +17,7 @@
   // var p = new Point(1, 2)
   // console.log(p)
 
+  let methodName = 'getArea'
 
   class Point {
     constructor(x, y) {
@@ -30,10 +31,90 @@
     doStuff() {
       console.log('stuff');
     }
+    [methodName]() {
+      console.log('area')
+    }
   }
 
-  const p = new Point();
+  const p = new Point(2, 3);
   p.doStuff()
+  p.getArea()
+
+  console.log(Point.prototype.constructor === Point)
+  console.log(p)
+
+  console.log(p.hasOwnProperty('x'))
+  console.log(p.hasOwnProperty('y'))
+  console.log(p.hasOwnProperty('toString'))
+  console.log(p.__proto__.hasOwnProperty('toString'))
+
+
+  class Foo {
+    constructor() {
+      return Object.create(Array)
+    }
+  }
+  console.info('查看构造函数Foo的prototype是不是在实例对象new Foo()的原型链上')
+  console.log(new Foo() instanceof Foo)
+
+
+  let person = new class {
+    constructor(name) {
+      this.name = name;
+    }
+
+    sayName() {
+      console.log(this.name);
+    }
+
+    * [Symbol.iterator]() {
+      for (let arg of this.args) {
+        yield arg;
+      }
+    }
+
+  }('张三');
+
+  person.sayName();
+
+
+  class Logger {
+    printName(name = 'there') {
+      this.print(`Hello ${name}`);
+    }
+
+    print(text) {
+      console.log(text)
+    }
+
+    static classMethod() {
+      return 'hello!';
+    }
+  }
+  const logger = new Logger();
+
+  class LoggerChild extends Logger {}
+  console.log(LoggerChild.classMethod())
+
+  class MyClass {
+    static myStaticProp = 42;
+
+    constructor() {
+      console.log(MyClass.myStaticProp);// 42
+    }
+  }
+
+  // 私有属性
+  class Widget {
+    foo (baz) {
+      bar.call(this, baz)
+    }
+  }
+
+  function bar(baz) {
+    return this.snaf = baz;
+  }
+
 
 
 
