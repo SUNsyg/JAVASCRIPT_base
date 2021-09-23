@@ -115,8 +115,43 @@
     return this.snaf = baz;
   }
 
+  class A {
+    #foo = 0;
+    use(obj) {
+      if (#foo in obj) {
+        // 私有属性 #foo 存在
+      } else {
+        // 私有属性 #foo 不存在
+      }
+    }
+
+    static test(obj) {
+      console.log(#foo in obj)
+    }
+  }
+  A.test(new A())
+  A.test({})
+  class B {
+    #foo = 0;
+  }
+  A.test(new B())
 
 
+  class Rectangle {
+    constructor(length, width) {
+      console.log(new.target === Rectangle)
+      this.length = length;
+      this.width = width;
+    }
+  }
+  var obj = new Rectangle(3, 4); // 输出 true
+
+  class Square extends Rectangle {
+    constructor(length, width) {
+      super(length, width);
+    }
+  }
+  var cObj = new Square(3)
 
 
 </script>
