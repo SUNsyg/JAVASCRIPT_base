@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>编程风格</title>
+</head>
+<body>
+<script>
+  function concatAll() {
+    const args = Array.prototype.slice.call(arguments);
+    return args.join('')
+  }
+
+  function concatAll1(...args) {
+    return args.join('')
+  }
+  let arr = [1,2,3,4,5]
+  console.log(concatAll(arr))
+  console.log(concatAll1(arr))
+
+  function arrayC(arr = []) {
+    return arr.join('')
+  }
+  function ObjectS(obj = {}) {
+    //
+  }
+
+  let str = 'xqnwoinwi'
+  let map = new Map(str)
+  for(let key of map.keys()){
+    console.log(key)
+  }
+</script>
+</body>
+</html>
