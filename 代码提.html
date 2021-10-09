@@ -6,13 +6,41 @@
 </head>
 <body>
 <script>
-  function sayHi() {
-    console.log(name);
-    console.log(age);
-    var name = "Lydia";
-    let age = 21;
+  // function sayHi() {
+  //   console.log(name);
+  //   console.log(age);
+  //   var name = "Lydia";
+  //   let age = 21;
+  // }
+  // sayHi()
+
+
+  function f1 () {
+    var n = 1000;
+    function f2 () {
+      alert(n)
+    }
+    f2()
   }
-  sayHi()
+
+  f1()
+
+  var name = "The Window";
+
+  var object = {
+    name : "My Object",
+
+    getNameFunc : function(){
+      var that = this;
+      return function(){
+        return that.name;
+      };
+
+    }
+
+  };
+
+  alert(object.getNameFunc()());
 </script>
 </body>
 </html>
