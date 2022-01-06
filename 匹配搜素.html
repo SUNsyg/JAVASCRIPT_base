@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>匹配搜索</title>
+</head>
+<body>
+<input type="text" id="input" oninput="change()" />
+<div id="content"></div>
+<script>
+    function change() {
+        let val = document.getElementById('input').value;
+        console.log(val)
+        matchArr(val)
+    }
+    function matchArr(v) {
+        let f = document.getElementById('content');
+        f.innerHTML = ''
+        const names = ['canchu','chuyu','youbai','kehuishou'];
+        let current = names.filter((item, index) => {
+            if (item.includes(v)) {
+                return item
+            }
+        })
+        if (current.length > 0) {
+            current.forEach((item, index) => {
+                let c = document.createElement('div')
+                c.innerText = item;
+                f.appendChild(c)
+            })
+        }
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    const names = ['canchu','chuyu','youbai','kehuishou'];
+    let arr = $.grep(names, (item, index) => {
+        console.log(item)
+        console.log(index)
+    })
+</script>
+</body>
+</html>

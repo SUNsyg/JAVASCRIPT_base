@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取链接中参数以json格式</title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    const url = `http://zybory.com?a=test&b=1&c=t1&c=t2&c=t3&d`;
+
+    function getUrlParams(u) {
+        if(u.includes('?')) {
+            let arr = u.split('?')[1].split('&');
+            let obj = new Object();
+            arr.forEach((item, index) => {
+                if (obj[item.split('=')[0]]) {
+                    let a = new Array();
+                    if (typeof obj[item.split('=')[0]] == 'object') {
+                        a = obj[item.split('=')[0]];
+                        a.push(item.split('=')[1]);
+                    } else {
+                        a = [obj[item.split('=')[0]]]
+                        a.push(item.split('=')[1])
+                    }
+                    obj[item.split('=')[0]] = a;
+                } else {
+                    obj[item.split('=')[0]] = item.split('=')[1];
+                }
+            })
+            return obj;
+        }
+    }
+    console.log(getUrlParams(url))
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打乱顺序</title>
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    const a = [1,2,3,4,5,6,7,8]
+    // a.sort(randomSort);
+    // console.log(a);
+    // function randomSort(a, b) {
+    //     return Math.random() > 0.5 ? -1 : 1;
+    // }
+
+    function shuffle(arr) {
+        var length = arr.length,
+                randomIndex,
+                temp;
+        while (length) {
+            randomIndex = Math.floor(Math.random() * (length--));
+            temp = arr[randomIndex];
+            arr[randomIndex] = arr[length];
+            arr[length] = temp
+        }
+        return arr;
+    }
+    console.log(shuffle(a))
+
+    // function stuff(arr) {
+    //     for (let i=0; i<arr.length; i++) {
+    //         const tempIndex = Math.round(Math.random() * (arr.length -1 + i)) - i;
+    //         [arr[i], arr[tempIndex]] = [arr[tempIndex], arr[i]]
+    //     }
+    //     return arr;
+    // }
+    // console.log(stuff(a))
+
+
+
+</script>
+</body>
+</html>
