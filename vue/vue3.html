@@ -1,8 +1,8 @@
 <!--
- * @Description: 
+ * @Description:
  * @Author: Sun yinge
  * @Date: 2022-02-18 15:00:31
- * @LastEditTime: 2022-02-18 15:06:48
+ * @LastEditTime: 2022-02-21 11:34:37
  * @LastEditors: Sun yinge
 -->
 <!DOCTYPE html>
@@ -12,19 +12,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
     <script src="https://unpkg.com/vue@next"></script>
 </head>
 <body>
     <div id="hello-vue" class="demo">
         {{ message }}
     </div>
+    <button v-on:click="reverseMessage">反转 Message</button>
 
     <script>
         const HelloVueApp = {
             data() {
                 return {
                     message: 'Hello Vue!!'
+                }
+            },
+            methods: {
+                reverseMessage() {
+                    this.message = this.message.split('').reverse().join('')
                 }
             }
         }
